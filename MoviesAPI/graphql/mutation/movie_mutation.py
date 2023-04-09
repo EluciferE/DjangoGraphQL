@@ -17,7 +17,7 @@ class CreateMovie(graphene.Mutation):
     @staticmethod
     def mutate(root, info: GraphQLResolveInfo, input: MovieInput = None):
         actor_ids = [actor_input.id for actor_input in input.actors]
-        actors = [Actor.objects.filter(id__in=actor_ids)]
+        actors = Actor.objects.filter(id__in=actor_ids)
 
         if len(actors) != len(actor_ids):
             return CreateMovie(status=False, movie=None)
